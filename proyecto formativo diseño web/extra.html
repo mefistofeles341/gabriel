@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicina General</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #001f3f;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 1.1em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #00509e;
+            transform: translateY(-2px);
+        }
+
+        section {
+            padding: 60px 20px;
+            text-align: center;
+            background-color: #ffffff;
+            margin: 40px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+
+        .btn-return {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #00509e;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn-return:hover {
+            background-color: #003f7d;
+            transform: scale(1.05);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #001f3f;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        input[type="text"], input[type="email"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        .submit-btn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        #responseMessage {
+            margin-top: 20px;
+            font-weight: bold;
+            color: green;
+        }
+
+        /* Estilo de la calculadora */
+        .calculator {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 10px;
+            background-image: url('https://www.zarla.com/images/zarla-cardio-sano-1x1-2400x2400-20230822-pbq93v344mw3wrhkhp6g.png?crop=1:1,smart&width=250&dpr=2');
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            color: #fff;
+            width: 200px;  /* Reduce el tamaño de la calculadora */
+            margin: 0 auto;
+        }
+
+        #display {
+            width: 100%;
+            height: 40px;  /* Disminuye la altura */
+            font-size: 20px;
+            text-align: right;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #000;
+        }
+
+        .button {
+            width: 50px;  /* Disminuye el tamaño de los botones */
+            height: 50px;
+            font-size: 18px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .button:active {
+            background-color: rgba(200, 200, 200, 0.9);
+            transform: scale(0.95);
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .row .button:last-child {
+            width: calc(100% - 220px);  /* Ajusta el tamaño del último botón */
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#top">Inicio</a>
+        <a href="#section1">Sección 1</a>
+        <a href="#section2">Sección 2</a>
+        <a href="#section3">Contacto</a>
+    </nav>
+
+    <header id="top">
+        <h1>Medicina General</h1>
+    </header>
+
+    <section id="section1">
+        <!-- Contenido de la sección 1 (Calculadora) -->
+        <div class="calculator">
+            <input type="text" id="display" disabled>
+            <div class="row">
+                <button class="button" onclick="clearDisplay()">C</button>
+                <button class="button" onclick="appendToDisplay('/')">/</button>
+                <button class="button" onclick="appendToDisplay('')"></button>
+                <button class="button" onclick="deleteLast()">←</button>
+            </div>
+            <div class="row">
+                <button class="button" onclick="appendToDisplay('7')">7</button>
+                <button class="button" onclick="appendToDisplay('8')">8</button>
+                <button class="button" onclick="appendToDisplay('9')">9</button>
+                <button class="button" onclick="appendToDisplay('-')">-</button>
+            </div>
+            <div class="row">
+                <button class="button" onclick="appendToDisplay('4')">4</button>
+                <button class="button" onclick="appendToDisplay('5')">5</button>
+                <button class="button" onclick="appendToDisplay('6')">6</button>
+                <button class="button" onclick="appendToDisplay('+')">+</button>
+            </div>
+            <div class="row">
+                <button class="button" onclick="appendToDisplay('1')">1</button>
+                <button class="button" onclick="appendToDisplay('2')">2</button>
+                <button class="button" onclick="appendToDisplay('3')">3</button>
+                <button class="button" onclick="calculateResult()">=</button>
+            </div>
+            <div class="row">
+                <button class="button" style="width: calc(100% - 160px);" onclick="appendToDisplay('0')">0</button>
+                <button class="button" onclick="appendToDisplay('.')">.</button>
+                <button class="button" onclick="squareNumber()">x²</button>
+            </div>
+        </div>
+        <a href="#top" class="btn-return">Volver al menú principal</a>
+    </section>
+
+    <section id="section2">
+        <!-- Contenido de la sección 2 (To Do UPDS) -->
+        <div class="container">
+            <h1>To Do UPDS</h1>
+            <ul id="task-list">
+                <li>Asistir a clase de medicina <button class="remove-btn">Eliminar</button></li>
+                <li>Estudiar anatomía <button class="remove-btn">Eliminar</button></li>
+                <li>Realizar práctica de laboratorio <button class="remove-btn">Eliminar</button></li>
+            </ul>
+    
+            <input type="text" id="new-task" placeholder="Nueva actividad...">
+            <button class="add-btn" onclick="addTask()">Agregar actividad</button>
+    
+            <div class="celebration" id="victory-message">¡Todas las actividades completadas!</div>
+        </div>
+        <a href="#top" class="btn-return">Volver al menú principal</a>
+    </section>
+    
+    <section id="section3">
+        <!-- Formulario de contacto -->
+        <div class="container">
+            <h1>Contacto</h1>
+            <form id="contact-form">
+                <input type="text" id="nombre" placeholder="Nombre completo" required>
+                <input type="text" id="celular" placeholder="Número de celular" required>
+                <input type="email" id="email" placeholder="Correo electrónico" required>
+                <textarea id="consulta" placeholder="Consulta" required></textarea>
+                <button type="submit" class="submit-btn">Enviar</button>
+            </form>
+            <div id="responseMessage"></div>
+        </div>
+        <a href="#top" class="btn-return">Volver al menú principal</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Medicina General. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Formulario de contacto
+        document.getElementById('contact-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('nombre').value;
+            const celular = document.getElementById('celular').value;
+            const email = document.getElementById('email').value;
+            const consulta = document.getElementById('consulta').value;
+            
+            // Mensaje para WhatsApp, codificado en URL
+            const mensaje = `Hola, soy ${nombre}.\n\nNúmero de celular: ${celular}\nCorreo electrónico: ${email}\nConsulta: ${consulta}`;
+            
+            // Formato de enlace de WhatsApp
+            const enlaceWhatsApp = `https://wa.me/59173260083?text=${encodeURIComponent(mensaje)}`;
+            
+            // Redirigir al enlace de WhatsApp
+            window.location.href = enlaceWhatsApp;
+            
+            // Mostrar mensaje de éxito
+            document.getElementById('responseMessage').textContent = 'Gracias ' + nombre + ', su consulta ha sido enviada correctamente.';
+        });
+    </script>
+    
+
+</body>
+</html>
